@@ -11,6 +11,8 @@
 	import { scaleTime, scaleLinear } from 'd3-scale';
 	import { extent, max, min } from 'd3-array';
 
+	export let step = Infinity;
+
 	let innerWidth = 0;
 	let innerHeight = 0;
 
@@ -139,7 +141,7 @@
 			labels={['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']}
 			/>
 			
-          {#each menTimeline as m}
+          {#each menTimeline.slice(0, step) as m}
 			<MonthPath
 			innerRadius={m.innerRadius}
 			outerRadius={m.outerRadius}
@@ -176,7 +178,7 @@
 			labels={['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']}
 			/>
 			
-          {#each womenTimeline as w}
+          {#each womenTimeline.slice(0, step) as w}
 			<MonthPath
 			innerRadius={w.innerRadius}
 			outerRadius={w.outerRadius}
