@@ -16,6 +16,8 @@
     export let color = 'teal';
     export let fillColor='burnt-umber';
 
+    export let selected = false;
+
     $: arcGen = arc()
         .innerRadius(innerRadius)
         .outerRadius(outerRadius);
@@ -25,5 +27,13 @@
     d={arcGen({ startAngle, endAngle})}
     fill = {fillColor}
     stroke = {color}
-    stroke-width = "2"
+    stroke-width = {selected ? 3 : 2}
+    class:selected={selected}
 />
+
+<style>
+  /* your “selected” styling */
+  .selected {
+    stroke: gold;
+  }
+</style>
