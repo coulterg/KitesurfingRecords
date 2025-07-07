@@ -6,9 +6,15 @@
 
 	import RadialWaterfall from "./components/RadialWaterfall.svelte";
 	import Scrolly from "./components/Scrolly.svelte";
+
+	import { annotationMap } from './lib/data/annotations.js'
+	import CurrentInfo from './components/CurrentInfo.svelte';
 	
-	let selectedGender = 'men'
+	let gender = 'men'
 	let step = 0;
+
+	// let currentEntry = [];
+	// let currentRec = [];
 	
 	// Parsing and storing data
 	let raw = []
@@ -66,6 +72,13 @@
 			if (menRec   && menH   > lastMenH)   lastMenH   = menH;
 			if (womenRec && womenH > lastWomenH) lastWomenH = womenH;
 
+			// get annotations
+			const key = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, '0')}`
+			const { men = '', women = '' } = annotationMap[key] || {};
+
+			console.log(key, annotationMap[key])
+
+
 			return {
 				date,
 				label:     fmtMonth(date),
@@ -77,11 +90,19 @@
 				menRec,      // undefined if no record this month
 				womenRec,    // likewise
 				// annotations or other fields you like
-				menAnnotation:   menRec?.annotation   || '',
-				womenAnnotation: womenRec?.annotation || ''
+				menAnnotation:   men,
+				womenAnnotation: women
 			};
 		});
 	}
+
+	$: currentEntry = entries[step] || null;
+	$: currentRec = (
+		entries
+			.slice(0, step+1)                      // take all up to and including the current step
+			.reverse()                              // search backwards
+			.find	(e => e[gender + 'Rec'])           // find first entry that has a record
+	)?.[gender + 'Rec'] || null;
 </script>
 
 <main>
@@ -94,7 +115,7 @@
 			<input
 				type="radio"
 				name="gender"
-				bind:group={selectedGender}
+				bind:group={gender}
 				value="men" />
 			Men
 		</label>
@@ -103,12 +124,14 @@
 			<input
 				type="radio"
 				name="gender"
-				bind:group={selectedGender}
+				bind:group={gender}
 				value="women" />
 			Women
 		</label>
 
 	</fieldset>
+	<div class='spacer' />
+	<div class='spacer' />
 
 	{#if entries.length}
 		<div class='scrolly-plot-wrapper'>
@@ -117,7 +140,7 @@
 					<div class='step' class:active={step === i}>
 						<div class='step-label'>{e.label}</div>
 						<div class='step-annotation'>
-							{selectedGender === 'men' ? e.menAnnotation : e.womenAnnotation}
+							{gender === 'men' ? e.menAnnotation : e.womenAnnotation}
 						</div>
 					</div>
 				{/each}
@@ -126,8 +149,12 @@
 			<div class='plot-container'>
 				<RadialWaterfall 
 				entries={entries}
-				step={step}
-				gender={selectedGender}/>
+				step={step ?? 0}
+				gender={gender}/>
+				<CurrentInfo
+					monthLabel = {currentEntry?.label}
+					record = {currentRec}
+				/>
 			</div>
 		</div>
 	{:else}
@@ -176,10 +203,16 @@
 		align-items: start;       /* keep chart pinned to top of its column */
 		}
 	/* stack on mobile */
-	@media (max-width: 600px) {
+	@media (max-width: 900px) {
 		.scrolly-plot-wrapper {
 			flex-direction: column-reverse;
 	}
+	}
+	.current-month {
+		font-size: 1.25rem;
+		font-weight: bold;
+		margin-bottom: 0.5rem; /* space between label and chart */
+		text-align: left;
 	}
 	.plot-container {
 		position: sticky;

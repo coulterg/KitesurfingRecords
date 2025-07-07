@@ -15,14 +15,15 @@
 	let innerHeight = 0;
 	let plotHeightRatio = 4/5;
 	$: chartSize = Math.min(innerWidth, innerHeight * plotHeightRatio);
-	const padding = 20;
+	const padding = 50;
 
 	// what gender are we plotting?
 	$: heightField = gender === 'men' ? 'menH' : 'womenH';
 
 	$: radiusScale = entries.length
 		? scaleLinear()
-			.domain([0, max(entries, e => e[heightField])])
+			.domain([0, max(entries, e => e.menH)]) // Hardcoded to men scale
+			.nice(5)
 			.range([0, (chartSize/2) - padding])
 		: null;
 
@@ -38,10 +39,6 @@
 		};
 	}
 </script>
-
-<p style="position:absolute;top:0;left:0;color:red">
-  step={step}
-</p>
 
 <svelte:window bind:innerWidth bind:innerHeight />
 
@@ -61,7 +58,7 @@
       />
 
       <!-- 2) reveal first `step` entries -->
-      {#each entries.slice(0, step) as entry, i}
+      {#each entries.slice(0, step+1) as entry, i}
         {@const { start, end } = monthAngles(entry.date)}
         <MonthPath
           innerRadius={radiusScale(entry[gender + 'Prev'])}
@@ -70,7 +67,7 @@
           endAngle={end}
           color={gender === 'men' ? 'steelblue' : 'hotpink'}
           fillColor="lightgrey"
-		  selected={i === step - 1 && !!entry[gender + 'Annotation']}
+		  selected={i === step && !!entry[gender + 'Annotation']}
         />
       {/each}
 
@@ -79,23 +76,14 @@
         scale={radiusScale}
         cx={0}
         cy={0}
-        tickCount={5}
+        tickCount={6}
+		subCount={2}
         strokeColor="#ddd"
         labelColor="#444"
         axisLabel="Jump Height (m)"
       />
     </g>
   </svg>
-
-  <!-- 4) optional display of current record's location -->
-  {#if entries[step-1]}
-    <div class="current-meta">
-      Location:
-      {entries[step-1][gender + 'Rec']?.location ?? '–'}
-    </div>
-  {/if}
-{:else}
-  <p>Loading...</p>
 {/if}
 
 <style>
