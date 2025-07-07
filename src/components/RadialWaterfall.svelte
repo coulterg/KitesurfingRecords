@@ -94,10 +94,9 @@
     align-items: flex-start;
     flex-wrap: wrap;
   }
-  .plot {
-    text-align: center;
-  }
   svg {
+	max-width: 100%;
+	height: auto;
     display: block;
     margin: 0 auto;
   }

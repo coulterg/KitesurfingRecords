@@ -130,47 +130,59 @@
 		</label>
 
 	</fieldset>
+
 	<div class='spacer' />
 	<div class='spacer' />
 
 	{#if entries.length}
 		<div class='scrolly-plot-wrapper'>
-			<Scrolly bind:value={step}>
-				{#each entries as e, i}
-					<div class='step' class:active={step === i}>
-						<div class='step-label'>{e.label}</div>
-						<div class='step-annotation'>
-							{gender === 'men' ? e.menAnnotation : e.womenAnnotation}
+			<div class='steps-container'>
+				<Scrolly bind:value={step}>
+					{#each entries as e, i}
+						<div class='step' class:active={step === i}>
+							<div class='step-label'>{e.label}</div>
+							<div class='step-annotation'>
+								{gender === 'men' ? e.menAnnotation : e.womenAnnotation}
+							</div>
 						</div>
-					</div>
-				{/each}
-			</Scrolly>
-			<div class='spacer' />
+					{/each}
+					<div class='spacer' />
+					<div class='spacer' />	
+				</Scrolly>
+			</div>
+			<!-- <div class='spacer' /> -->
 			<div class='plot-container'>
-				<RadialWaterfall 
-				entries={entries}
-				step={step ?? 0}
-				gender={gender}/>
-				<CurrentInfo
-					monthLabel = {currentEntry?.label}
-					record = {currentRec}
-				/>
+				<div class='radial-plot'>
+					<RadialWaterfall 
+						entries={entries}
+						step={step ?? 0}
+						gender={gender}/>
+					<CurrentInfo
+						monthLabel = {currentEntry?.label}
+						record = {currentRec}
+					/>
+				</div>
+				
 			</div>
 		</div>
 	{:else}
 		<p>Loading data…</p>
  	{/if}
+
+	<div class='spacer' />
+	<div class='spacer' />
 </main>
 
 <style>
 	main {
-		max-width: 800px;
+		max-width: 1600px;
 		margin: 2rem auto;
 		font-family: system-ui, sans-serif;
 		text-align: center;
 	}
 	h1 {
 		margin-bottom: 1.5rem;
+		text-align: center;
 	}
 	fieldset {
 		border: none;
@@ -196,27 +208,80 @@
 	}
 	.spacer {
 		height: 50vh;
+		/* width: 90vw; */
+		/* max-width:1000px; */
+		display: flex;
+		align-items: center;
 	}
 	.scrolly-plot-wrapper {
-		display: flex;
+		width: 100%; /* fill parent container (the viewport) */
+		max-width: 3000px; /* but not wider than 1600 */
+		margin: 0 auto;
+		
+		display: grid;
+		/* justify-content: center; */
+		grid-template-columns: 
+			minmax(0, 0.5fr) 
+			repeat(8, minmax(0, 2fr)) 
+			minmax( 0, 0.5fr);
 		gap: 2rem;
-		align-items: start;       /* keep chart pinned to top of its column */
 		}
+
+	.steps-container {
+		grid-column: 2 / 5;
+	}
+	.plot-container {
+		grid-column: 5 / 10;
+		position: sticky;
+		align-self: start;
+		align-items: center;
+		top: 5rem;
+		max-width: 100%;
+		/* min-width: 650px; */
+	}
+	.radial-plot {
+		text-align: center;
+		align-self: center;
+		max-width: 80%;
+		margin: 0 auto;
+  }
+
+	*, *::before, *::after {
+		box-sizing: border-box;
+		}
+
 	/* stack on mobile */
-	@media (max-width: 900px) {
+	@media (max-width: 650px) {
 		.scrolly-plot-wrapper {
+			display: flex;
 			flex-direction: column-reverse;
+			width: 100vw;
+			max-width: none;
+			margin: 0;
+		}
+		.plot-container {
+			/* position: static; */
+			align-self: start;
+			/* justify-content: center; */
+			margin: 0 auto;
+			top: 2rem;
+			width: 90vw;
+		}
+		.radial-plot {
+			max-width: 90%;
+		}
+		.steps-container {
+			display: flex;
+			align-self: center;
+			z-index: 10;
+		}
 	}
-	}
+
 	.current-month {
 		font-size: 1.25rem;
 		font-weight: bold;
 		margin-bottom: 0.5rem; /* space between label and chart */
 		text-align: left;
 	}
-	.plot-container {
-		position: sticky;
-		top: 2rem;          /* how far from the top of the viewport */
-		align-self: start;  /* if its parent is a flex row, keep it at the top */
-	}
+	
 </style>
