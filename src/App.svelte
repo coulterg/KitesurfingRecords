@@ -175,6 +175,7 @@
 
 <style>
 	main {
+		width: 90vw;
 		max-width: 1600px;
 		margin: 2rem auto;
 		font-family: system-ui, sans-serif;
