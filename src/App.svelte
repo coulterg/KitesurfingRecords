@@ -106,7 +106,30 @@
 </script>
 
 <main>
-	<h1>Kitesurfing Record Waterfall</h1>
+	<section class='hero'>
+		<h1>
+			<span class='title-main'>Reaching New Heights</span>
+			<span class='title-sub'>The evolution of kitesurfing jump records</span>
+		</h1>
+	</section>
+	<div class='intro-section'>
+		<p class='intro-text'>Picture yourself on the upper level of a 2-storey house, looking out the window - a height 
+			most of us instinctively understand.
+			<br><br>
+			Now, if that already feels a little lofty, stretch your imagination to the rooftop of a 12-storey building. 
+			Think typical city-centre, mid-rise apartment block, and you're in the right ball-park. Gazing out,
+			almost <b>40 meters</b> (or <b>130 feet</b>), above the ground.
+			<br><br>
+			Really picture it - at that kind of height, someone's head would be far smaller than the nail on your pinky finger, held out at arms length.
+			<br><br>
+			A little <i>spine-chilling</i>, no?
+			<br><br>
+			That's the kind of scale elite kitesurfers reach these days, launching themselves skywards
+			from the sea, up and over 12-storeys, and back down to safety. Over, and over again.
+			<br><br>
+			Let's explore how we got to these unimaginable heights.			
+		</p>
+	</div>
 
 	<fieldset>
 		<legend>Show:</legend>
@@ -130,9 +153,6 @@
 		</label>
 
 	</fieldset>
-
-	<div class='spacer' />
-	<div class='spacer' />
 
 	{#if entries.length}
 		<div class='scrolly-plot-wrapper'>
@@ -174,17 +194,61 @@
 </main>
 
 <style>
+	:global(html, body) {
+		height: 100%;
+		margin: 0;
+
+		font-family: 'Inter', sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 300;
+		line-height: 1.6;
+		color: #222
+	}
+
 	main {
 		width: 90vw;
 		max-width: 1600px;
 		margin: 2rem auto;
-		font-family: system-ui, sans-serif;
-		text-align: center;
+		text-align: left;
 	}
+
 	h1 {
+		font-family: 'Merriweather', serif;
+		font-weight: 350;
+		font-size: clamp(2.2rem, 4vw + 1rem, 3rem);
+		line-height: 1.2;
 		margin-bottom: 1.5rem;
 		text-align: center;
+		color: #444;
 	}
+
+	h2 {
+		font-family: 'Merriweather', serif;
+		font-weight: 320;
+		font-size: clamp(1.6rem, 2vw + 0.5rem, 2.6rem);
+		line-height: 1.3;
+		margin-bottom: 1.2rem;
+		/* text-align: center; */
+	}
+
+	h3 {
+		font-family: 'Merriweather', serif;
+		font-weight: 300;
+		font-size: clamp(1.3rem, 1.2vw + 0.5rem, 1.8rem);
+		line-height: 1.4;
+		margin-bottom: 1rem;
+		/* text-align: center; */
+	}
+
+	h4 {
+		font-family: 'Merriweather', serif;
+		font-weight: 300;
+		font-size: clamp(1.1rem, 1vw + 0.4rem, 1.4rem);
+		line-height: 1.5;
+		margin-bottom: 0.8rem;
+		/* text-align: center; */
+	}
+
 	fieldset {
 		border: none;
 		margin-bottom: 1.5rem;
@@ -199,6 +263,54 @@
 	input[type="radio"] {
 		margin-right: 0.3rem;
 	}
+
+	.hero {
+		display: flex;              /* or grid with place-items:center */
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 90vh;
+		margin-left: 20vw;
+		margin-right: 20vw;
+		padding: 0 1rem;
+		text-align: center;
+	}
+
+	.title-main {
+		display: block;
+		font-size: clamp(2.5rem, 5vw + 1rem, 3rem);
+		font-weight: 300;
+		font-family: 'Merriweather', serif;
+		/* line-height: 1.1; */
+		margin-bottom: 1.5rem;
+		text-align: left;
+		/* margin: 0; */
+	}
+
+	.title-sub {
+		display: block;
+		font-size: clamp(1.8rem, 2vw + .75rem, 2.4rem);
+		font-weight: 200;
+		font-family: 'Inter', sans-serif;
+		/* line-height: 1.1; */
+		margin-top: 0.5rem;
+		margin: 0;
+		letter-spacing: 0.08em;
+		text-align: right;
+	}
+
+	.intro-section {
+		height: auto;
+		margin: auto;
+		margin-bottom: 150px;
+		max-width: 650px;
+	}
+	.intro-text {
+		font-size: 20px;
+		line-height: 32px;
+	}
+	
+	
 	.step {
 		padding: 2rem;
 		opacity: 0.3;

@@ -15,6 +15,8 @@
 			<strong>Height:</strong> {record.height} m  
 			&nbsp;|&nbsp;
 			<strong>Location:</strong> {record.location+', '+record.country}
+            &nbsp;|&nbsp;
+            <strong>Kite:</strong> {record.kiteSize}m<sup>2 </sup>{record.kiteBrand+' '+record.kiteModel}
 		</div>
     {:else}
 		<div class="current-meta">
