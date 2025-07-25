@@ -11,6 +11,7 @@
     export let labelColor = '#666';
 
     export let axisLabel = '';
+    export let fontSize;
 
     // Construct major and minor tick pattern
     let majors = [];
@@ -44,10 +45,9 @@
     {#if axisLabel}
         <text 
             x={cx}
-            y={cy - maxRadius - 10}
+            y={cy - maxRadius - fontSize*2}
             text-anchor='middle'
-            font-size='0.9rem'
-            font-weight='bold'
+            font-size={fontSize}
             fill={labelColor}
         >
             {axisLabel}
@@ -75,7 +75,7 @@
             r={scale(t)}
             fill='none'
             stroke={strokeColor}
-            stroke-width='2'
+            stroke-width='1'
         />
         <text
             class="grid-label"
@@ -85,6 +85,7 @@
             dx='-10'
             text-anchor='middle'
             fill={labelColor}
+            font-size={fontSize}
         >
             {fmt(t)}
         </text>
@@ -94,7 +95,7 @@
 <style>
     .grid-ring { pointer-events: none;}
     .grid-label { 
-        font-size: 0.75rem;
+        font-size: fontSize;
         font-family: sans-serif;
     }
 </style>

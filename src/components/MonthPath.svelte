@@ -27,13 +27,15 @@
     d={arcGen({ startAngle, endAngle})}
     fill = {fillColor}
     stroke = {color}
-    stroke-width = {selected ? 3 : 2}
+    stroke-width = 1.2
     class:selected={selected}
 />
 
 <style>
   /* your “selected” styling */
   .selected {
-    stroke: gold;
+    stroke: var(--color-highlight-stroke);
+    fill: var(--color-highlight-fill);
+    transition: 0.3s ease;
   }
 </style>

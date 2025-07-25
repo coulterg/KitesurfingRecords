@@ -2,7 +2,10 @@
     export let count = 12;
     export let radius = 100;
     export let labelOffset = 16;
-    export let labels = [];
+    export let labels = []
+    export let spokeColor;
+    export let labelColor;
+    export let fontSize;
 
     const TWO_PI = 2 * Math.PI;
     $: stepRad = TWO_PI / count;
@@ -22,7 +25,7 @@
             y1 = '0'
             x2 = {Math.cos(startAngle) * radius}
             y2 = {Math.sin(startAngle) * radius}
-            stroke='#999'
+            stroke={spokeColor}
             stroke-width='1'
         />
 
@@ -32,8 +35,8 @@
                 y={-(radius + labelOffset)}
                 text-anchor='middle'
                 alignment-baseline='middle'
-                ont-size='0.75rem'
-                fill='#333'
+                font-size={fontSize}
+                fill={labelColor}
             >
                 {labels[i] ?? i + 1}    
             </text>

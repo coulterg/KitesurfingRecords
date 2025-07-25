@@ -112,7 +112,7 @@
 			<span class='title-sub'>The evolution of kitesurfing jump records</span>
 		</h1>
 	</section>
-	<div class='intro-section'>
+	<section class='intro-section' aria-label='Introduction'>
 		<p class='intro-text'>Picture yourself on the upper level of a 2-storey house, looking out the window - a height 
 			most of us instinctively understand.
 			<br><br>
@@ -127,67 +127,67 @@
 			That's the kind of scale elite kitesurfers reach these days, launching themselves skywards
 			from the sea, up and over 12-storeys, and back down to safety. Over, and over again.
 			<br><br>
-			Let's explore how we got to these unimaginable heights.			
+			How did we get to such unimaginable heights?			
 		</p>
-	</div>
-
-	<fieldset>
-		<legend>Show:</legend>
-
-		<label>
-			<input
-				type="radio"
-				name="gender"
-				bind:group={gender}
-				value="men" />
-			Men
-		</label>
-
-		<label>
-			<input
-				type="radio"
-				name="gender"
-				bind:group={gender}
-				value="women" />
-			Women
-		</label>
-
-	</fieldset>
-
-	{#if entries.length}
-		<div class='scrolly-plot-wrapper'>
-			<div class='steps-container'>
-				<Scrolly bind:value={step}>
-					{#each entries as e, i}
-						<div class='step' class:active={step === i}>
-							<div class='step-label'>{e.label}</div>
-							<div class='step-annotation'>
-								{gender === 'men' ? e.menAnnotation : e.womenAnnotation}
+	</section>
+	<section aria-labelledby="record-progression">
+		{#if entries.length}
+			<div class='scrolly-plot-wrapper'>
+				<div class='steps-container'>
+					<Scrolly bind:value={step}>
+						{#each entries as e, i}
+							<div class='step' class:active={step === i}>
+								<div class='step-label'>{e.label}</div>
+								<div class='step-annotation'>
+									{gender === 'men' ? e.menAnnotation : e.womenAnnotation}
+								</div>
 							</div>
-						</div>
-					{/each}
-					<div class='spacer' />
-					<div class='spacer' />	
-				</Scrolly>
-			</div>
-			<!-- <div class='spacer' /> -->
-			<div class='plot-container'>
-				<div class='radial-plot'>
-					<RadialWaterfall 
-						entries={entries}
-						step={step ?? 0}
-						gender={gender}/>
-					<CurrentInfo
-						monthLabel = {currentEntry?.label}
-						record = {currentRec}
-					/>
+						{/each}
+						<div class='spacer' />
+						<div class='spacer' />	
+					</Scrolly>
 				</div>
-				
+				<!-- <div class='spacer' /> -->
+				<div class='plot-container'>
+					<h2 id='record-progression'>World Record Progression</h2>
+					<div role='group' aria-label='Select gender' class='gender-toggle'>
+						<button
+							type='button'
+							aria-pressed={gender === 'men'}
+							on:click={() => gender = 'men'}
+						>
+							Men
+						</button>
+						<span>|</span>
+						<button
+							type='button'
+							aria-pressed={gender === 'women'}
+							on:click={() => gender = 'women'}
+							>
+							Women
+						</button>
+					</div>
+					<div class='month-label'>
+						{currentEntry?.label ?? 'Dec 2013'}
+					</div>
+					<div class='radial-plot'>
+						<div class='plot-clip'>
+							<RadialWaterfall 
+								entries={entries}
+								step={step ?? 0}
+								gender={gender}/>	
+						</div>
+					</div>
+					<CurrentInfo
+							monthLabel = {currentEntry?.label}
+							record = {currentRec}
+						/>
+				</div>
 			</div>
-		</div>
-	{:else}
-		<p>Loading data…</p>
- 	{/if}
+		{:else}
+			<p>Loading data…</p>
+		{/if}
+	</section>
 
 	<div class='spacer' />
 	<div class='spacer' />
@@ -202,7 +202,9 @@
 		font-optical-sizing: auto;
 		font-weight: 300;
 		line-height: 1.6;
-		color: #222
+		color: var(--color-text-1);
+		background: var(--bg-gradient) no-repeat center center fixed;
+		background-size: cover;
 	}
 
 	main {
@@ -219,15 +221,18 @@
 		line-height: 1.2;
 		margin-bottom: 1.5rem;
 		text-align: center;
-		color: #444;
+		color: var(--color-text-1);
 	}
 
 	h2 {
+		/* display: flex; */
+		margin-block-end: 0.1rem;
 		font-family: 'Merriweather', serif;
-		font-weight: 320;
-		font-size: clamp(1.6rem, 2vw + 0.5rem, 2.6rem);
-		line-height: 1.3;
-		margin-bottom: 1.2rem;
+		font-weight: 310;
+		font-size: clamp(1.8rem, 2vw + 0.5rem, 2rem);
+		/* line-height: 1.3; */
+		/* margin-bottom: 1.2rem; */
+		color: var(--color-text-1);
 		/* text-align: center; */
 	}
 
@@ -249,7 +254,7 @@
 		/* text-align: center; */
 	}
 
-	fieldset {
+	/* fieldset {
 		border: none;
 		margin-bottom: 1.5rem;
 		display: flex;
@@ -262,7 +267,7 @@
 	}
 	input[type="radio"] {
 		margin-right: 0.3rem;
-	}
+	} */
 
 	.hero {
 		display: flex;              /* or grid with place-items:center */
@@ -297,6 +302,7 @@
 		margin: 0;
 		letter-spacing: 0.08em;
 		text-align: right;
+		color: var(--color-text-2)
 	}
 
 	.intro-section {
@@ -310,7 +316,36 @@
 		line-height: 32px;
 	}
 	
+	.gender-toggle button {
+		display: inline-flex;
+		background: none;
+		border: none;
+		padding: 0;
+		margin: 0;
+		margin-right: 0.4rem;
+		font: inherit;         /* use the same font-size / weight */
+		color: inherit;        /* same text color */
+		cursor: pointer;
+		font-size: 1.3rem;
+		opacity: 0.3;       /* show pointer on hover */
+	}
+
+	.gender-toggle button:last-child {
+		margin-right: 0;
+		margin-left: 0.4rem;
+	}
 	
+	.gender-toggle button[aria-pressed="true"] {
+		opacity: 1;
+		transition: opacity 0.3s ease;
+	}
+
+	.month-label{
+		font-size: 1.2rem;
+		color: var(--color-text-2);
+		opacity: 0.75;
+	}
+
 	.step {
 		padding: 2rem;
 		opacity: 0.3;
@@ -347,47 +382,162 @@
 		grid-column: 5 / 10;
 		position: sticky;
 		align-self: start;
-		align-items: center;
-		top: 5rem;
-		max-width: 100%;
-		/* min-width: 650px; */
+		top: 0;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 
+			auto /* h2 */
+			auto /* toggle gender */
+			auto /* year month */
+			1fr /* plot */
+			auto; /* metadata */
+		height: 100vh;
+		row-gap: 0rem;
+		/* position: relative; */
+		/* outline: 2px dashed hotpink;     temporary debug outline */
+
 	}
+
+	.plot-container > h2 {
+		grid-row: 1;
+		grid-column: 1;
+		justify-self: start;
+		z-index: 2;
+		position: relative;
+
+	}
+
+	.plot-container > .gender-toggle {
+		grid-row: 2;
+		grid-column: 1;
+		justify-self: start;
+		z-index: 2;
+		position: relative;
+	}
+
+	.plot-container > .month-label {
+		grid-row: 3;
+		grid-column: 1;
+		justify-self: start;
+		z-index: 2;
+		position: relative;
+	}
+
+	.plot-container > .radial-plot {
+		grid-row: 3 / 6;
+		grid-column: 1;
+		justify-self: center;
+		align-items: center;
+		position: relative;
+		z-index: 1;
+		margin: 0;
+	}
+
 	.radial-plot {
-		text-align: center;
+		/* /* text-align: center; */
 		align-self: center;
-		max-width: 80%;
+		/* max-width: 80%; */
+		width: clamp(650px, 85%, 90%);
 		margin: 0 auto;
   }
+
+	.plot-container > .current-info {
+		grid-row: 5;
+		grid-column: 1;
+		justify-self: start;
+		z-index: 2;	
+		position: relative;
+	}
 
 	*, *::before, *::after {
 		box-sizing: border-box;
 		}
 
 	/* stack on mobile */
-	@media (max-width: 650px) {
+	@media (max-width: 900px) {
+		main {
+			width: 97vw;
+			margin: 0;
+		}
+		.intro-section {
+			margin: 5vw auto;
+			width: clamp(70vw, 85vw, 650px);
+
+			display: flex;             
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
 		.scrolly-plot-wrapper {
 			display: flex;
 			flex-direction: column-reverse;
-			width: 100vw;
-			max-width: none;
-			margin: 0;
+			width: 97vw;
+    		box-sizing: border-box;
+			justify-content: center;
+			align-items: center;
 		}
 		.plot-container {
-			/* position: static; */
-			align-self: start;
-			/* justify-content: center; */
-			margin: 0 auto;
-			top: 2rem;
-			width: 90vw;
+			justify-content: center;
+			margin: 0;
+			width: 100%;
+			height: 100%;
 		}
-		.radial-plot {
-			max-width: 90%;
+		.plot-container > h2 {
+			margin-left: 4vw;
+		}
+		.plot-container > .gender-toggle {
+			position: relative;
+			margin-left: 4vw;
+			z-index: 11;
+		}
+		.plot-container > .month-label {
+			margin-left: 4vw;
+		}
+		.plot-container > .radial-plot {
+			/* width:                   clamp(550px, 650px, 650px); */
+			width: 100%;
+			overflow-x: hidden;
+			overflow-y: visible;
+			align-items: center;
+			justify-content: center;
+		}
+		/* Clip & center the real chart inside a fixed box */
+		.plot-clip {
+			width: 650px;
+			min-width: 650px;
+			max-width: none;    /* so it can shrink if seriously needed */
+			margin: 0 auto;     /* center it in the 100% container */
+			overflow-x: hidden; /* hide the extra bits */
+			position: relative;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+		/* If you can target the <svg> itself, ensure it matches */
+		.plot-clip :global(svg) {
+			display: block;
+			width: 650px;
+			max-width: none; 
+		}
+		.plot-container :global(.current-info > .info-left) {
+			margin-left: 4vw;
+			margin-bottom: 4vw;
+		}
+		.plot-container :global(.current-info > .info-right) {
+			margin-right: 4vw;
+			margin-bottom: 4vw;
 		}
 		.steps-container {
-			display: flex;
-			align-self: center;
-			z-index: 10;
+			display: block;
+			/* align-self: center; */
+			/* width: 90vw; */
+			justify-content: center;
+			align-items: center;
+			margin:  5vw auto;
+			position: relative;
+			z-index: 8;
 		}
+
 	}
 
 	.current-month {

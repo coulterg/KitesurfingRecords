@@ -17,6 +17,8 @@
 	$: chartSize = Math.min(innerWidth, innerHeight * plotHeightRatio);
 	const padding = 50;
 
+  $: labelSize = chartSize * 0.02;  // 4% of chart width
+
 	// what gender are we plotting?
 	$: heightField = gender === 'men' ? 'menH' : 'womenH';
 
@@ -26,6 +28,18 @@
 			.nice(5)
 			.range([0, (chartSize/2) - padding])
 		: null;
+
+  let colorText1, colorText2, colorFillMen, colorStrokeMen, colorFillWomen, colorStrokeWomen, colorFillHighlight, colorStrokeHighlight;
+  const styles = getComputedStyle(document.documentElement);
+  colorText1      = styles.getPropertyValue('--color-text-1').trim();
+  colorText2      = styles.getPropertyValue('--color-text-2').trim();
+  colorFillMen    = styles.getPropertyValue('--color-men-fill').trim();
+  colorStrokeMen  = styles.getPropertyValue('--color-men-stroke').trim();
+  colorFillWomen  = styles.getPropertyValue('--color-women-fill').trim();
+  colorStrokeWomen= styles.getPropertyValue('--color-women-stroke').trim();
+  colorFillHighlight = styles.getPropertyValue('--color-highlight-fill').trim();
+  colorStrokeHighlight = styles.getPropertyValue('--color-highlight-stroke').trim();
+  
 
 	const TWO_PI = 2 * Math.PI;
 
@@ -55,6 +69,23 @@
         count={12}
         radius={chartSize/2 - padding}
         labels={['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']}
+        spokeColor={colorText2}
+        labelColor={colorText1}
+        fontSize={labelSize}
+      />
+
+      <!-- 3) concentric rings -->
+      <RadialAxis
+        scale={radiusScale}
+        cx={0}
+        cy={0}
+        tickCount={6}
+		    subCount={2}
+        strokeColor={colorText1}
+        minorColor={colorText2}
+        labelColor={colorText1}
+        axisLabel="Jump Height (m)"
+        fontSize={labelSize}
       />
 
       <!-- 2) reveal first `step` entries -->
@@ -65,23 +96,13 @@
           outerRadius={radiusScale(entry[gender + 'H'])}
           startAngle={start}
           endAngle={end}
-          color={gender === 'men' ? 'steelblue' : 'hotpink'}
-          fillColor="lightgrey"
+          color={gender === 'men' ? colorStrokeMen : colorStrokeWomen}
+          fillColor={gender === 'men' ? colorFillMen : colorFillWomen}
 		  selected={i === step && !!entry[gender + 'Annotation']}
         />
       {/each}
 
-      <!-- 3) concentric rings -->
-      <RadialAxis
-        scale={radiusScale}
-        cx={0}
-        cy={0}
-        tickCount={6}
-		subCount={2}
-        strokeColor="#ddd"
-        labelColor="#444"
-        axisLabel="Jump Height (m)"
-      />
+
     </g>
   </svg>
 {/if}
