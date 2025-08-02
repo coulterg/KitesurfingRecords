@@ -136,11 +136,12 @@
 				<div class='steps-container'>
 					<Scrolly bind:value={step}>
 						{#each entries as e, i}
-							<div class='step' class:active={step === i}>
-								<div class='step-label'>{e.label}</div>
-								<div class='step-annotation'>
-									{gender === 'men' ? e.menAnnotation : e.womenAnnotation}
-								</div>
+							<div class='step' class:active={step === i} class:has-annotation={gender === 'men' ? e.menAnnotation : e.womenAnnotation}>
+								{#if (gender === 'men' ? e.menAnnotation : e.womenAnnotation)}
+									<div class='step-content'>
+										{gender === 'men' ? e.menAnnotation : e.womenAnnotation}
+									</div>
+								{/if}
 							</div>
 						{/each}
 						<div class='spacer' />
@@ -347,11 +348,49 @@
 	}
 
 	.step {
-		padding: 2rem;
+		height: 15vh;  /* Small height for empty steps */
 		opacity: 0.3;
-		transition: opacity 0.2s;
+		display: flex;
+		place-items: center;
+		justify-content: center;
+		align-items: center;
+		padding: 1rem;
+		transition: all 0.3s ease;
+		margin: 0;  /* Reset any margins */
 	}
-	.step.active {
+
+	.step.has-annotation {
+		height: 50vh;  /* Changed from 100vh to 50vh */
+		margin: 25vh 0 0;  
+		/* Add vertical margins to center and create space */
+	}
+
+	.step.has-annotation.active {
+		/* height: 60vh;  Full height only for active steps with annotations */
+		opacity: 1;
+	}
+
+	.step-content {
+		font-size: 1rem;
+		background: var(--color-bg-2);
+		color: var(--color-text-1);
+		border-radius: 5px;
+		padding: .5rem 1rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		transition: background 500ms ease, color 500ms ease;
+		box-shadow: 1px 1px 10px rgba(0,0,0,.2);
+		text-align: left;
+		width: 75%;
+		margin: auto;
+		/* max-width: 500px; */
+		/* position: sticky;   */
+		top: 50vh;         /* Position in middle of viewport */
+		transform: translateY(-50%);  /* Center vertically */
+	}
+
+	.step.active .step-content {
 		opacity: 1;
 	}
 	.spacer {
