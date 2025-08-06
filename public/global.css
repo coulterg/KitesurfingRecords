@@ -4,6 +4,10 @@
 	--color-bg-2: #ebeadc;
 	--color-text-1: #333;
 	--color-text-2: #484848;
+	--color-text-1-light: #f0f0f0;
+	--color-text-2-light: #D3D3D3;
+	--color-text-1-dark: #333;
+	--color-text-2-dark: #484848;
 	--color-men-fill: #56F1CC;
 	--color-men-stroke: #17997A;
 	--color-women-fill: #F89D57;
@@ -24,6 +28,10 @@
 		--color-bg-2: #0a163d;
 		--color-text-1: #f0f0f0;
 		--color-text-2: #D3D3D3;
+		--color-text-1-light: #f0f0f0;
+		--color-text-2-light: #D3D3D3;
+		--color-text-1-dark: #333;
+		--color-text-2-dark: #484848;
 		--color-men-fill: #17997A;
 		--color-men-stroke: #56F1CC;
 		--color-women-fill: #AD2D09;
