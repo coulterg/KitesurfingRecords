@@ -17,6 +17,7 @@
     export let fillColor='burnt-umber';
 
     export let selected = false;
+    export let current = false;
 
     $: arcGen = arc()
         .innerRadius(innerRadius)
@@ -29,6 +30,7 @@
     stroke = {color}
     stroke-width = 1.2
     class:selected={selected}
+    class:current={current}
 />
 
 <style>
@@ -37,5 +39,9 @@
     stroke: var(--color-highlight-stroke);
     fill: var(--color-highlight-fill);
     transition: 0.3s ease;
+  }
+  .current {
+    stroke-width: 2.7;
+    /* transition: 0.3s ease; */
   }
 </style>

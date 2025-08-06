@@ -98,7 +98,8 @@
           endAngle={end}
           color={gender === 'men' ? colorStrokeMen : colorStrokeWomen}
           fillColor={gender === 'men' ? colorFillMen : colorFillWomen}
-		  selected={i === step && !!entry[gender + 'Annotation']}
+          selected={i === step && !!entry[gender + 'Annotation']}
+          current={i === step && !entry[gender + 'Annotation']}
         />
       {/each}
 

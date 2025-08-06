@@ -106,29 +106,55 @@
 </script>
 
 <main>
-	<section class='hero'>
-		<h1>
-			<span class='title-main'>Reaching New Heights</span>
-			<span class='title-sub'>The evolution of kitesurfing jump records</span>
-		</h1>
+	<section class='hero-wrapper'>
+		<div class='hero-content'>
+			<h1 class='title-main'>Reaching New Heights</h1>
+			<h2 class='title-sub'>The evolution of kitesurfing jump records</h2>
+		</div>
 	</section>
 	<section class='intro-section' aria-label='Introduction'>
-		<p class='intro-text'>Picture yourself on the upper level of a 2-storey house, looking out the window - a height 
-			most of us instinctively understand.
-			<br><br>
-			Now, if that already feels a little lofty, stretch your imagination to the rooftop of a 12-storey building. 
-			Think typical city-centre, mid-rise apartment block, and you're in the right ball-park. Gazing out,
-			almost <b>40 meters</b> (or <b>130 feet</b>), above the ground.
-			<br><br>
-			Really picture it - at that kind of height, someone's head would be far smaller than the nail on your pinky finger, held out at arms length.
-			<br><br>
-			A little <i>spine-chilling</i>, no?
-			<br><br>
-			That's the kind of scale elite kitesurfers reach these days, launching themselves skywards
-			from the sea, up and over 12-storeys, and back down to safety. Over, and over again.
-			<br><br>
-			How did we get to such unimaginable heights?			
+		<h2>Riding the Wind</h2>
+		<p class='intro-text'>Kitesurfing is an incredible sport. The fundamental principle is similar to 
+			most wind-driven sports: the wind can be exploited for movement. You steer the vessel 
+			and 'sail' in a particular direction, and the power caught by your sail, combined with your 
+			rudder, propels you in the right direction. If you get the angles right, you can even use this 
+			principle to move upwind.
+			<br><br><br>
+			With upwind movement, the ocean is your oyster. Provided there is wind...
+			<br><br><br>
+			When sailing or windsurfing, your sail is largely confined to rotate about your mast, giving you 
+			all the movement you might need; upwind, downwind, cross-wind... You name it - but this movement is 
+			confined to the surface of the sea, a two dimensional plane.
+			<br><br><br>
+			Kitesurfing introduces access to a third dimension. With the kite high in the sky, the propelling 
+			force is vertical, generating lift and taking flight, with kitesurfers riding the wind to ever increasing, 
+			and unimaginable heights.
 		</p>
+	</section>
+	<section class='height-intro-section' aria-label='Unimaginable Heights'>
+		<div class='height-intro-background'></div>
+		<div class='height-intro-content'>
+			<h2 class='height-intro-title'>Unimaginable Heights</h2>
+			<div class='height-intro-text'>
+				<p class='intro-text'>
+					Picture yourself on the upper level of a 2-storey house, looking out the window - a height 
+					most of us instinctively understand.
+					<br><br><br><br>
+					Now, if that already feels a little lofty, stretch your imagination to the rooftop of a 12-storey building. 
+					Think typical city-centre, mid-rise apartment block, and you're in the right ball-park. Gazing out,
+					almost <b>40 meters</b> (or <b>130 feet</b>), above the ground.
+					<br><br><br><br>
+					Really picture it - at that kind of height, someone's head would be far smaller than the nail on your pinky finger, held out at arms length.
+					<br><br><br><br>
+					A little <i>spine-chilling</i>, no?
+					<br><br><br><br>
+					That's the kind of scale elite kitesurfers reach these days, launching themselves skywards
+					from the sea, up and over 12-storeys, and back down to safety. Over, and over again.
+					<br><br><br><br>
+					How did we get to such unimaginable heights?			
+				</p>
+			</div>
+		</div>
 	</section>
 	<section aria-labelledby="record-progression">
 		{#if entries.length}
@@ -206,12 +232,11 @@
 		color: var(--color-text-1);
 		background: var(--bg-gradient) no-repeat center center fixed;
 		background-size: cover;
+		overflow-x: hidden;
 	}
 
 	main {
-		width: 90vw;
-		max-width: 1600px;
-		margin: 2rem auto;
+		width: 100%;
 		text-align: left;
 	}
 
@@ -226,15 +251,16 @@
 	}
 
 	h2 {
-		/* display: flex; */
-		margin-block-end: 0.1rem;
+		display: block;
+		margin-block-end: 2rem;
 		font-family: 'Merriweather', serif;
 		font-weight: 310;
 		font-size: clamp(1.8rem, 2vw + 0.5rem, 2rem);
-		/* line-height: 1.3; */
-		/* margin-bottom: 1.2rem; */
+		line-height: 1.3;
+		margin-top: 3rem;
+		/* margin-bottom: 2rem; */
 		color: var(--color-text-1);
-		/* text-align: center; */
+		text-align: center;
 	}
 
 	h3 {
@@ -255,31 +281,35 @@
 		/* text-align: center; */
 	}
 
-	/* fieldset {
-		border: none;
-		margin-bottom: 1.5rem;
-		display: flex;
-		justify-content: center;
-		gap: 1.5rem;
-	}
-	label {
-		font-size: 1rem;
-		cursor: pointer;
-	}
-	input[type="radio"] {
-		margin-right: 0.3rem;
-	} */
+	.hero-wrapper {
+		position: relative;
+		height: 100vh;
+		width: 100vw;
+		margin: 0;
+		margin-top: 0;
+		padding-top: 0;
+		background:
+			url('/assets/Hero.jpg')
+			52% top
+			/ max(1530px, 100vw) auto
+			no-repeat;
 
-	.hero {
-		display: flex;              /* or grid with place-items:center */
+		overflow: hidden;
+		overflow-x: hidden;
+	}
+
+	.hero-content {
+		position: relative;
+		height: 100vh;
+		width: 50%; 
+		/* min(1530px, 100%); */
+		margin: 0 auto;
+		display: flex;
+		gap: 3rem;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: flex-start;
+		padding-top: 34vh; /* center keeps centred vertically along main flex axis (column) */
 		align-items: center;
-		height: 90vh;
-		margin-left: 20vw;
-		margin-right: 20vw;
-		padding: 0 1rem;
-		text-align: center;
 	}
 
 	.title-main {
@@ -287,23 +317,24 @@
 		font-size: clamp(2.5rem, 5vw + 1rem, 3rem);
 		font-weight: 300;
 		font-family: 'Merriweather', serif;
-		/* line-height: 1.1; */
-		margin-bottom: 1.5rem;
+		line-height: 1.1;
+		min-height: calc(2 * 1em * 1.1);
+		margin-right: 10%;
 		text-align: left;
-		/* margin: 0; */
+		color: var(--color-text-1-dark);
 	}
 
 	.title-sub {
 		display: block;
-		font-size: clamp(1.8rem, 2vw + .75rem, 2.4rem);
+		font-size: clamp(1.8rem, 2vw + .75rem, 2.0rem);
 		font-weight: 200;
-		font-family: 'Inter', sans-serif;
-		/* line-height: 1.1; */
-		margin-top: 0.5rem;
-		margin: 0;
+		font-family: 'Inter', sans-serif; 
+		line-height: 1.1;
+		margin-left: 25%;
+		margin-right: 12%;
 		letter-spacing: 0.08em;
 		text-align: right;
-		color: var(--color-text-2)
+		color: var(--color-text-1-light)
 	}
 
 	.intro-section {
@@ -315,6 +346,79 @@
 	.intro-text {
 		font-size: 20px;
 		line-height: 32px;
+	}
+
+	.height-intro-section {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		position: relative;
+		align-items: start;
+
+		/* padding-bottom: 100vh; */
+	}
+
+	.height-intro-background {
+		grid-column: 1 / 4;
+		grid-row: 1 / 2;
+		position: sticky;
+		top: 0;
+		height: 100vh;
+		z-index: 0;
+
+		background: 
+			url('/assets/apartments.jpg') 
+			70% 15%
+			/ min(100vw, 1790px) auto
+
+			no-repeat;
+		/* overflow-x: hidden; */
+
+		-webkit-mask-image: linear-gradient(
+			to right, 
+			black 50%, 
+			transparent 100%);
+		mask-image: linear-gradient(
+			to right, 
+			black 50%, 
+			transparent 100%);
+		mask-mode: alpha;
+
+		pointer-events: none;
+	}
+
+
+	.height-intro-content {
+		grid-column: 3 / 5;
+		grid-row: 1 / 2;
+		position: relative;
+		box-sizing: border-box;
+		top: 0;
+		align-items: start;
+
+		margin-top: 50vh;
+		padding-left: 8rem;
+		padding-right: 8rem;
+	}
+
+	.height-intro-title {
+		/* position: relative; */
+		/* top: 50vh; */
+		/* transform: translateY(-50%); */
+		margin: 0 0 2rem;
+		/* margin-top:50vh; */
+		/* z-index: 2; */
+	}
+
+	.height-intro-text {
+		margin-top: 50vh;
+		margin-bottom: 50vh;
+		/* font-size: 20px;
+		line-height: 32px; */
+		/* grid-column: 3 / 5;
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column; */
 	}
 	
 	.gender-toggle button {
@@ -357,17 +461,20 @@
 		padding: 1rem;
 		transition: all 0.3s ease;
 		margin: 0;  /* Reset any margins */
+		pointer-events: none;
 	}
 
 	.step.has-annotation {
 		height: 50vh;  /* Changed from 100vh to 50vh */
 		margin: 25vh 0 0;  
 		/* Add vertical margins to center and create space */
+		pointer-events: none;
 	}
 
 	.step.has-annotation.active {
 		/* height: 60vh;  Full height only for active steps with annotations */
 		opacity: 1;
+		pointer-events: none;
 	}
 
 	.step-content {
@@ -388,10 +495,12 @@
 		/* position: sticky;   */
 		top: 50vh;         /* Position in middle of viewport */
 		transform: translateY(-50%);  /* Center vertically */
+		pointer-events: none;
 	}
 
 	.step.active .step-content {
 		opacity: 1;
+		pointer-events: none;
 	}
 	.spacer {
 		height: 50vh;
@@ -498,6 +607,23 @@
 			width: 97vw;
 			margin: 0;
 		}
+
+		.hero-wrapper {
+			width: 100%;
+			background:
+				url('/assets/Hero.jpg')
+				38% top
+				/ max(1530px, 100vw) auto
+				no-repeat;
+		}
+
+		.title-sub {
+			margin-right: 0;
+		}
+
+		.hero-content {
+			width: min(450px, 90vw);
+		}
 		.intro-section {
 			margin: 5vw auto;
 			width: clamp(70vw, 85vw, 650px);
@@ -575,6 +701,7 @@
 			margin:  5vw auto;
 			position: relative;
 			z-index: 8;
+			pointer-events: none;
 		}
 
 	}

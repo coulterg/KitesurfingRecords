@@ -75,13 +75,13 @@ export const annotationMap = {
     },
     '2015-02': {
         men: '',
-        women: "A record almost instantly broken by Gerdian Mjnten, smashing through 10m to a 13.9m height - imagine a large shpping container, longways-up - higher than that."
+        women: "A record almost instantly broken by Gerdian Mjnten, smashing through 10m to a 13.9m height - imagine a large shipping container, longways-up - higher than that."
     },
     '2015-10': {
         men: '',
         women: "October 2015, enter Jia Lin 'Karen' Hou from Penghu Island, Taiwan, breaking the 15m barrier at 15.6m. Remember this name."
     },
-    '2018-02': {
+    '2018-01': {
         men: '',
         women: "Already her 7th entry into the record books, Karen Hou breaks the 20m barrier on the famous Kite Beach in Cape Town, breaking her own record for the 6th time at 20.5m."
     },
@@ -91,7 +91,7 @@ export const annotationMap = {
     },
     '2023-12': {
         men: '',
-        women: "Over a year after her previous record, Angely sets another, again smashing through a milestone, this time 30m. The 32.6m jump brings the womens leaderboard within the range of the mens, an unsurprising achievement from Bouillot, the only female competitor to ever ridfe in Red Bull's 'King of the Air' event, inspiring the introduction of a Women's category. This massive 32.6m jump, the largest single increase in the women's leaderboard, is where the record stands today.",
+        women: "Over a year after her previous record, Angely sets another, again smashing through a milestone, this time 30m. The 32.6m jump brings the womens leaderboard within the range of the mens, an unsurprising achievement from Bouillot, the only female competitor to ever ride in Red Bull's 'King of the Air' event, inspiring the introduction of a Women's category. This massive 32.6m jump, the largest single increase in the women's leaderboard, is where the record stands today.",
     },
 
 };
