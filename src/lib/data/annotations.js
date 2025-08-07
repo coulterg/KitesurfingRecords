@@ -55,7 +55,7 @@ export const annotationMap = {
         men: "... years...",
         women: ''
     },
-    '2023-02': {
+    '2023-01': {
         men: "... with the 35 m barrier finally being broken by the Netherlands' Jamie Overbeek.",
         women: ''
     },
