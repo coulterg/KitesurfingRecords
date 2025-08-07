@@ -296,7 +296,7 @@
 		margin-top: 0;
 		padding-top: 0;
 		background:
-			url('/assets/Hero.jpg')
+			url('../assets/Hero.jpg')
 			52% top
 			/ max(1530px, 100vw) auto
 			no-repeat;
@@ -374,7 +374,7 @@
 		z-index: 0;
 
 		background: 
-			url('/assets/apartments.jpg') 
+			url('../assets/apartments.jpg') 
 			70% 15%
 			/ auto min(100vh, 1190px)
 
@@ -606,7 +606,7 @@
 		.hero-wrapper {
 			width: 100%;
 			background:
-				url('/assets/Hero.jpg')
+				url('../assets/Hero.jpg')
 				38% top
 				/ max(1530px, 100vw) auto
 				no-repeat;
@@ -649,7 +649,7 @@
 			/* left: 0; */
 			width: 100%;
 			height: 100vh;
-			background: url('/assets/apartments.jpg') 60% 
+			background: url('../assets/apartments.jpg') 60% 
 			/ cover 
 			no-repeat;
 			opacity: 0.2;           /* your 20% fade */
