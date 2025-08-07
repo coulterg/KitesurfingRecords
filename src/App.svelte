@@ -217,7 +217,14 @@
 	</section>
 
 	<div class='spacer' />
+	<section class="coming-soon-section" aria-label="Upcoming Profiles">
+		<div class="coming-soon-content">
+			<h2>Coming soon…</h2>
+			<h3>The who’s and how’s setting these records.</h3>
+		</div>
+	</section>
 	<div class='spacer' />
+
 </main>
 
 <style>
@@ -269,7 +276,7 @@
 		font-size: clamp(1.3rem, 1.2vw + 0.5rem, 1.8rem);
 		line-height: 1.4;
 		margin-bottom: 1rem;
-		/* text-align: center; */
+		text-align: center;
 	}
 
 	h4 {
@@ -363,24 +370,24 @@
 		position: sticky;
 		top: 0;
 		height: 100vh;
+		/* width: 100%; */
 		z-index: 0;
 
 		background: 
 			url('/assets/apartments.jpg') 
 			70% 15%
-			/ min(100vw, 1790px) auto
+			/ auto min(100vh, 1190px)
 
 			no-repeat;
-		/* overflow-x: hidden; */
 
-		-webkit-mask-image: linear-gradient(
+		/* -webkit-mask-image: linear-gradient(
 			to right, 
 			black 50%, 
-			transparent 100%);
+			transparent 100%); */
 		mask-image: linear-gradient(
 			to right, 
-			black 50%, 
-			transparent 100%);
+			black 50%,
+			transparent 90%);
 		mask-mode: alpha;
 
 		pointer-events: none;
@@ -401,24 +408,12 @@
 	}
 
 	.height-intro-title {
-		/* position: relative; */
-		/* top: 50vh; */
-		/* transform: translateY(-50%); */
 		margin: 0 0 2rem;
-		/* margin-top:50vh; */
-		/* z-index: 2; */
 	}
 
 	.height-intro-text {
 		margin-top: 50vh;
 		margin-bottom: 50vh;
-		/* font-size: 20px;
-		line-height: 32px; */
-		/* grid-column: 3 / 5;
-		position: relative;
-		z-index: 1;
-		display: flex;
-		flex-direction: column; */
 	}
 	
 	.gender-toggle button {
@@ -617,8 +612,13 @@
 				no-repeat;
 		}
 
+		.title-main {
+			padding-left: 2rem;
+		}
+
 		.title-sub {
 			margin-right: 0;
+			padding-right: 2rem;
 		}
 
 		.hero-content {
@@ -633,6 +633,40 @@
 			justify-content: center;
 			align-items: center;
 		}
+
+		.height-intro-section {
+			/* 1) Stack content first so it scrolls over the background */
+			display: block;
+			/* flex-direction: column-reverse; */
+			position: relative;     /* containing block for the bg */
+			overflow: visible;
+		}
+
+		.height-intro-background {
+			/* 2) Pull the image out of the flow and pin it full-viewport */
+			position: sticky;        /* LOCK to the viewport */
+			top: 0;
+			/* left: 0; */
+			width: 100%;
+			height: 100vh;
+			background: url('/assets/apartments.jpg') 60% 
+			/ cover 
+			no-repeat;
+			opacity: 0.2;           /* your 20% fade */
+			mask: none !important;  /* kill any gradient mask */
+			-webkit-mask: none !important;
+			z-index: 0;
+			pointer-events: none;   /* let clicks pass through */
+		}
+
+		.height-intro-content {
+			/* 3) Keep your text above the background */
+			position: relative;
+			z-index: 1;
+			padding: 2rem;
+			margin: 0;
+		}
+
 		.scrolly-plot-wrapper {
 			display: flex;
 			flex-direction: column-reverse;
